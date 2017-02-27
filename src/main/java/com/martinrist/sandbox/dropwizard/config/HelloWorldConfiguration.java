@@ -1,10 +1,9 @@
-package com.martinrist.sandbox.dropwizard;
+package com.martinrist.sandbox.dropwizard.config;
 
-import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.NotEmpty;
 
-public class SandboxConfiguration extends Configuration {
+public class HelloWorldConfiguration {
 
     @NotEmpty
     private String template;
@@ -31,4 +30,5 @@ public class SandboxConfiguration extends Configuration {
     public void setDefaultName(String defaultName) {
         this.defaultName = defaultName;
     }
+
 }

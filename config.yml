@@ -3,5 +3,6 @@ logging:
   loggers:
     com.martinrist: DEBUG
 
-template: Hello, %s!
-defaultName: Stranger
+helloWorld:
+  template: Hello, %s!
+  defaultName: Stranger
