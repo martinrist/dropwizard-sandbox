@@ -1,5 +1,6 @@
 package com.martinrist.sandbox.dropwizard;
 
+import com.martinrist.sandbox.dropwizard.cli.HelloWorldCommand;
 import com.martinrist.sandbox.dropwizard.config.HelloWorldConfiguration;
 import com.martinrist.sandbox.dropwizard.config.SandboxConfiguration;
 import com.martinrist.sandbox.dropwizard.health.TemplateHealthCheck;
@@ -30,6 +31,7 @@ public class SandboxApplication extends Application<SandboxConfiguration> {
         bootstrap.setConfigurationSourceProvider(
                 new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
                         new EnvironmentVariableSubstitutor(false)));
+        bootstrap.addCommand(new HelloWorldCommand());
     }
 
     @Override
