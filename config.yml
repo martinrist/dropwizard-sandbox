@@ -5,4 +5,5 @@ logging:
 
 helloWorld:
   template: Hello, %s!
+  # To override setting, call java with -Ddw.helloWorld.defaultName=NEWNAME
   defaultName: Stranger
