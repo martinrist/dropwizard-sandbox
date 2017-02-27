@@ -2,6 +2,8 @@ package com.martinrist.sandbox.dropwizard.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.martinrist.sandbox.dropwizard.api.Saying;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,6 +16,8 @@ import java.util.concurrent.atomic.AtomicLong;
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
+
+    private final static Logger LOG = LoggerFactory.getLogger(HelloWorldResource.class);
 
     private final String template;
     private final String defaultName;
@@ -28,6 +32,7 @@ public class HelloWorldResource {
     @GET
     @Timed
     public Saying sayHello(@QueryParam("name") Optional<String> name) {
+        LOG.debug(">>> In sayHello() - name = " + name.orElse(defaultName));
         final String value = String.format(template, name.orElse(defaultName));
         return new Saying(counter.incrementAndGet(), value);
     }
