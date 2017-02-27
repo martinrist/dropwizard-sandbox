@@ -1,0 +1,8 @@
+logging:
+  level: INFO
+  loggers:
+    com.martinrist: DEBUG
+
+# This should fail the health-check because it doesn't contain the name
+template: Hello!
+defaultName: Stranger

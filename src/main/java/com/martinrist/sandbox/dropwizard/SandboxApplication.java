@@ -1,5 +1,7 @@
 package com.martinrist.sandbox.dropwizard;
 
+import com.martinrist.sandbox.dropwizard.health.TemplateHealthCheck;
+import com.martinrist.sandbox.dropwizard.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -17,13 +19,21 @@ public class SandboxApplication extends Application<SandboxConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<SandboxConfiguration> bootstrap) {
-        // TODO: application initialization
+
     }
 
     @Override
     public void run(final SandboxConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+
+        final HelloWorldResource helloWorldResource = new HelloWorldResource(
+                configuration.getTemplate(), configuration.getDefaultName());
+        environment.jersey().register(helloWorldResource);
+
+        final TemplateHealthCheck templateHealthCheck =
+                new TemplateHealthCheck(configuration.getTemplate());
+        environment.healthChecks().register("template", templateHealthCheck);
+
     }
 
 }
