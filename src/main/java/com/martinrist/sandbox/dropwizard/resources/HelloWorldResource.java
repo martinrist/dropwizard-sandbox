@@ -29,6 +29,10 @@ public class HelloWorldResource {
         this.counter = new AtomicLong();
     }
 
+    public void resetCounter() {
+        counter.set(0);
+    }
+
     @GET
     @Timed
     public Saying sayHello(@QueryParam("name") Optional<String> name) {

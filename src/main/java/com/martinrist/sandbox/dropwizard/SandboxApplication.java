@@ -6,6 +6,7 @@ import com.martinrist.sandbox.dropwizard.config.HelloWorldConfiguration;
 import com.martinrist.sandbox.dropwizard.config.SandboxConfiguration;
 import com.martinrist.sandbox.dropwizard.health.TemplateHealthCheck;
 import com.martinrist.sandbox.dropwizard.resources.HelloWorldResource;
+import com.martinrist.sandbox.dropwizard.tasks.ResetCounterTask;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -54,6 +55,7 @@ public class SandboxApplication extends Application<SandboxConfiguration> {
                 new TemplateHealthCheck(helloWorldConfig.getTemplate());
         environment.healthChecks().register("template", templateHealthCheck);
 
+        environment.admin().addTask(new ResetCounterTask(helloWorldResource));
     }
 
 }
