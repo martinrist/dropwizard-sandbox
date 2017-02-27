@@ -1,7 +1,6 @@
 package com.martinrist.sandbox.dropwizard.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.martinrist.sandbox.dropwizard.config.HelloWorldConfiguration;
 import io.dropwizard.Configuration;
 
 import javax.validation.Valid;

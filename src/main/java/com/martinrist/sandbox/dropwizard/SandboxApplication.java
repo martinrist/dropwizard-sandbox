@@ -5,6 +5,8 @@ import com.martinrist.sandbox.dropwizard.config.SandboxConfiguration;
 import com.martinrist.sandbox.dropwizard.health.TemplateHealthCheck;
 import com.martinrist.sandbox.dropwizard.resources.HelloWorldResource;
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
@@ -25,7 +27,9 @@ public class SandboxApplication extends Application<SandboxConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<SandboxConfiguration> bootstrap) {
-
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)));
     }
 
     @Override
@@ -33,6 +37,8 @@ public class SandboxApplication extends Application<SandboxConfiguration> {
                     final Environment environment) {
 
         final HelloWorldConfiguration helloWorldConfig = configuration.getHelloWorldConfig();
+        LOG.info("Read configuration property - template = {}", helloWorldConfig.getTemplate());
+        LOG.info("Read configuration property - defaultName = {}", helloWorldConfig.getDefaultName());
 
         LOG.info("Registering HelloWorldResource");
         final HelloWorldResource helloWorldResource = new HelloWorldResource(
